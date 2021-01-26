@@ -24,7 +24,7 @@
 			<MenuItem Header="Schauspieler_liste" ItemsSource="{Binding Path=Darsteller.Commands}">
 				<MenuItem.ItemTemplate>
 					<DataTemplate>
-						<MenuItem CommandParameter="{Binding ElementName=Grid, Path=SelectedItem}" Command="{Binding}" Header="{Binding Path=Text}"/>
+						<MenuItem Command="{Binding}" CommandParameter="{Binding ElementName=Grid, Path=SelectedItem}" Header="{Binding Path=Text}"/>
 					</DataTemplate>
 				</MenuItem.ItemTemplate>
 			</MenuItem>

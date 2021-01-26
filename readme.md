@@ -20,7 +20,7 @@ Right below the film detail form there are all commands related to the film whil
 
 <br/>
 
-Actors are maintained in a separate Window:
+The list of actors is maintained in a separate Window:
 ![Actor Window](.docs/ActorsWindow.png)
 
 Same rules apply here: All commands related to an actor are found below the input form while alle commands related to the whole list of actors of a film are found at the bottom of the window.
@@ -30,34 +30,48 @@ Same rules apply here: All commands related to an actor are found below the inpu
 
 All data may be edited inline. While editing, every record shifts to one of the following four states:
 
-|||
-|-|-|
-| | Untouched record, identical to repository version. |
-| ![New](.docs/new.png) | New record, yet uncomitted. |
-| ![Dirty](.docs/dirty.png) | Edited record, yet uncomitted. |
-| ![Committed](.docs/committed.png) | Committed record, yet unsaved to repository. |
+<table>
+  <tbody>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Untouched record, identical to repository version.</td>
+    </tr>
+    <tr>
+      <td><img alt="New" src=".docs/new.png"/></td>
+      <td>New record, yet uncomitted.</td>
+    </tr>
+    <tr>
+      <td><img alt="Dirty" src=".docs/dirty.png"/></td>
+      <td>Edited record, yet uncomitted.</td>
+    </tr>
+    <tr>
+      <td><img alt="Committed" src=".docs/committed.png"/></td>
+      <td>Committed record, yet unsaved to repository.</td>
+    </tr>
+  </tbody>
+</table>
 
 <br/>
 
 Films are adorned by the corresponding edit status icon in the film list on the left:
 
-![](.docs/FilmAdded.png)
+![Film Added screenshot](.docs/FilmAdded.png)
 
 <br/>
 
 Actors are adorned by the corresponding edit status icon next to the actor's or acress' name:
 
-![Actor Edited](.docs/ActorEdited.png)
+![Actor Edited screenshot](.docs/ActorEdited.png)
 
 ## Implementer's Notes
 
-All the business logic resides in the view-model code, as suggested by Microsoft's WPF MVVM pattern. There's almost no C# code present in the front-end project.
+All the business logic resides in the view-model code, as suggested by [Microsoft's WPF MVVM pattern guide](https://docs.microsoft.com/archive/msdn-magazine/2009/february/patterns-wpf-apps-with-the-model-view-viewmodel-design-pattern). There's almost no C# code present in the front-end project.
 
 Since this is a front-end test project, I refrained from implementing or utilizing any data storage. This piece
 of demo loads its data from a static in-memory array on application start and discards it when the program
 window closes.
 
-In this solution I kept comments and program labels in German because I planned it to only be a personal demonstration project and I wanted to see how the design adapts to large button texts.
+In this solution I kept comments and program labels in German because I planned it to only be a personal project and I was curious to see how well the design adapts to large button texts.
 
 This Visual Studio 2019 solution includes a wealth of unit tests, performed on the view-model part of the solution.
 

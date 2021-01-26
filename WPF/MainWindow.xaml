@@ -25,11 +25,14 @@
 			<ResourceDictionary>
 				<vm:FilmlisteVM x:Key="filme" />
 
+				<SolidColorBrush x:Key="ListBorderBrush" Color="#FFABAdB3"/>
+
 				<ResourceDictionary.MergedDictionaries>
 					<ResourceDictionary Source="SnapToDevicePixelsStyles.xaml"/>
 				</ResourceDictionary.MergedDictionaries>
 			</ResourceDictionary>
 		</DockPanel.Resources>
+
 		<DockPanel.DataContext>
 			<StaticResource ResourceKey="filme"/>
 		</DockPanel.DataContext>
@@ -52,116 +55,121 @@
 		</Menu>
 
 		<DockPanel>
-			<ListBox x:Name="Filmliste" ItemsSource="{Binding}" DockPanel.Dock="Left" Padding="6,4" HorizontalContentAlignment="Stretch" MinWidth="150" SelectionChanged="Filmliste_SelectionChanged">
-				<ListBox.ItemContainerStyle>
-					<Style TargetType="{x:Type ListBoxItem}">
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="{x:Type ListBoxItem}">
-									<ControlTemplate.Resources>
-										<LinearGradientBrush x:Key="background" StartPoint="0,0" EndPoint="0,1">
-											<GradientStop Offset="0" Color="white"/>
-											<GradientStop Offset="1" Color="#e0eeff"/>
-										</LinearGradientBrush>
+			<Border Padding="0,8" BorderBrush="{StaticResource ListBorderBrush}" BorderThickness="1">
+				<DockPanel>
+					<TextBlock DockPanel.Dock="Top" Text="Filmliste:" FontFamily="Calibri Light, Arial" FontSize="16" HorizontalAlignment="Center"/>
+					<ListBox x:Name="Filmliste" ItemsSource="{Binding}" DockPanel.Dock="Left" Padding="6,4" HorizontalContentAlignment="Stretch" MinWidth="150" SelectionChanged="Filmliste_SelectionChanged" BorderThickness="0">
+						<ListBox.ItemContainerStyle>
+							<Style TargetType="{x:Type ListBoxItem}">
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="{x:Type ListBoxItem}">
+											<ControlTemplate.Resources>
+												<LinearGradientBrush x:Key="background" StartPoint="0,0" EndPoint="0,1">
+													<GradientStop Offset="0" Color="white"/>
+													<GradientStop Offset="1" Color="#e0eeff"/>
+												</LinearGradientBrush>
 
-										<LinearGradientBrush x:Key="backgroundActiveSel" StartPoint="0,0" EndPoint="0,1">
-											<GradientStop Offset="0" Color="white"/>
-											<GradientStop Offset="1" Color="#b0d0ef"/>
-										</LinearGradientBrush>
+												<LinearGradientBrush x:Key="backgroundActiveSel" StartPoint="0,0" EndPoint="0,1">
+													<GradientStop Offset="0" Color="white"/>
+													<GradientStop Offset="1" Color="#b0d0ef"/>
+												</LinearGradientBrush>
 
-										<LinearGradientBrush x:Key="backgroundSel" StartPoint="0,0" EndPoint="0,1">
-											<GradientStop Offset="0" Color="white"/>
-											<GradientStop Offset="1" Color="#c8e0f8"/>
-										</LinearGradientBrush>
+												<LinearGradientBrush x:Key="backgroundSel" StartPoint="0,0" EndPoint="0,1">
+													<GradientStop Offset="0" Color="white"/>
+													<GradientStop Offset="1" Color="#c8e0f8"/>
+												</LinearGradientBrush>
 
-										<Duration x:Key="zoomInTime">0:0:0.2</Duration>
-										<Duration x:Key="zoomOutTime">0:0:0.4</Duration>
-										<CubicEase x:Key="easing"/>
-									</ControlTemplate.Resources>
+												<Duration x:Key="zoomInTime">0:0:0.2</Duration>
+												<Duration x:Key="zoomOutTime">0:0:0.4</Duration>
+												<CubicEase x:Key="easing"/>
+											</ControlTemplate.Resources>
 
-									<Border x:Name="Bd" BorderBrush="#acd" BorderThickness="1" Padding="10" CornerRadius="3" Margin="{Binding RelativeSource={RelativeSource AncestorType=ListBox},Path=Padding}" RenderTransformOrigin="0.5,0.5" Background="{StaticResource background}">
-										<Border.RenderTransform>
-											<ScaleTransform x:Name="sTr"/>
-										</Border.RenderTransform>
-										<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-									</Border>
+											<Border x:Name="Bd" BorderBrush="#acd" BorderThickness="1" Padding="10" CornerRadius="3" Margin="{Binding RelativeSource={RelativeSource AncestorType=ListBox},Path=Padding}" RenderTransformOrigin="0.5,0.5" Background="{StaticResource background}">
+												<Border.RenderTransform>
+													<ScaleTransform x:Name="sTr"/>
+												</Border.RenderTransform>
+												<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+											</Border>
 
-									<ControlTemplate.Triggers>
-										<MultiTrigger>
-											<MultiTrigger.Conditions>
-												<Condition Property="IsMouseOver" Value="True"/>
-											</MultiTrigger.Conditions>
-											<MultiTrigger.EnterActions>
-												<BeginStoryboard>
-													<Storyboard>
-														<DoubleAnimation To="1.1" Duration="{StaticResource zoomInTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleX" EasingFunction="{StaticResource easing}"/>
-														<DoubleAnimation To="1.1" Duration="{StaticResource zoomInTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleY" EasingFunction="{StaticResource easing}"/>
-													</Storyboard>
-												</BeginStoryboard>
-											</MultiTrigger.EnterActions>
-											<MultiTrigger.ExitActions>
-												<BeginStoryboard>
-													<Storyboard>
-														<DoubleAnimation Duration="{StaticResource zoomOutTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleX" EasingFunction="{StaticResource easing}"/>
-														<DoubleAnimation Duration="{StaticResource zoomOutTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleY" EasingFunction="{StaticResource easing}"/>
-													</Storyboard>
-												</BeginStoryboard>
-											</MultiTrigger.ExitActions>
-										</MultiTrigger>
-										<MultiTrigger>
-											<MultiTrigger.Conditions>
-												<Condition Property="Selector.IsSelectionActive" Value="False"/>
-												<Condition Property="IsSelected" Value="True"/>
-											</MultiTrigger.Conditions>
-											<Setter Property="Background" TargetName="Bd" Value="{StaticResource backgroundActiveSel}"/>
-											<Setter Property="BorderBrush" TargetName="Bd" Value="Blue"/>
-										</MultiTrigger>
-										<MultiTrigger>
-											<MultiTrigger.Conditions>
-												<Condition Property="Selector.IsSelectionActive" Value="True"/>
-												<Condition Property="IsSelected" Value="True"/>
-											</MultiTrigger.Conditions>
-											<Setter Property="Background" TargetName="Bd" Value="{StaticResource backgroundSel}"/>
-											<Setter Property="BorderBrush" TargetName="Bd" Value="Blue"/>
-										</MultiTrigger>
-										<Trigger Property="IsEnabled" Value="False">
-											<Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-										</Trigger>
-									</ControlTemplate.Triggers>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</ListBox.ItemContainerStyle>
+											<ControlTemplate.Triggers>
+												<MultiTrigger>
+													<MultiTrigger.Conditions>
+														<Condition Property="IsMouseOver" Value="True"/>
+													</MultiTrigger.Conditions>
+													<MultiTrigger.EnterActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation To="1.1" Duration="{StaticResource zoomInTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleX" EasingFunction="{StaticResource easing}"/>
+																<DoubleAnimation To="1.1" Duration="{StaticResource zoomInTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleY" EasingFunction="{StaticResource easing}"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</MultiTrigger.EnterActions>
+													<MultiTrigger.ExitActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation Duration="{StaticResource zoomOutTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleX" EasingFunction="{StaticResource easing}"/>
+																<DoubleAnimation Duration="{StaticResource zoomOutTime}" Storyboard.TargetName="sTr" Storyboard.TargetProperty="ScaleY" EasingFunction="{StaticResource easing}"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</MultiTrigger.ExitActions>
+												</MultiTrigger>
+												<MultiTrigger>
+													<MultiTrigger.Conditions>
+														<Condition Property="Selector.IsSelectionActive" Value="False"/>
+														<Condition Property="IsSelected" Value="True"/>
+													</MultiTrigger.Conditions>
+													<Setter Property="Background" TargetName="Bd" Value="{StaticResource backgroundActiveSel}"/>
+													<Setter Property="BorderBrush" TargetName="Bd" Value="Blue"/>
+												</MultiTrigger>
+												<MultiTrigger>
+													<MultiTrigger.Conditions>
+														<Condition Property="Selector.IsSelectionActive" Value="True"/>
+														<Condition Property="IsSelected" Value="True"/>
+													</MultiTrigger.Conditions>
+													<Setter Property="Background" TargetName="Bd" Value="{StaticResource backgroundSel}"/>
+													<Setter Property="BorderBrush" TargetName="Bd" Value="Blue"/>
+												</MultiTrigger>
+												<Trigger Property="IsEnabled" Value="False">
+													<Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+												</Trigger>
+											</ControlTemplate.Triggers>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ListBox.ItemContainerStyle>
 
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Grid VerticalAlignment="Center">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition/>
-								<ColumnDefinition Width="5"/>
-								<ColumnDefinition Width="Auto"/>
-							</Grid.ColumnDefinitions>
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Grid VerticalAlignment="Center">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition/>
+										<ColumnDefinition Width="5"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
 
-							<TextBlock Text="{Binding Name}">
-								<TextBlock.Style>
-									<Style>
-										<Setter Property="Validation.ErrorTemplate">
-											<Setter.Value>
-												<ControlTemplate>
-													<AdornedElementPlaceholder/>
-												</ControlTemplate>
-											</Setter.Value>
-										</Setter>
-									</Style>
-								</TextBlock.Style>
-							</TextBlock>
-							<Image Grid.Column="2" d:Source="{StaticResource Confirmed}" Source="{Binding Path=EditState, Converter={StaticResource stateImgConverter}}" ToolTip="{Binding Path=EditState}"/>
+									<TextBlock Text="{Binding Name}">
+										<TextBlock.Style>
+											<Style>
+												<Setter Property="Validation.ErrorTemplate">
+													<Setter.Value>
+														<ControlTemplate>
+															<AdornedElementPlaceholder/>
+														</ControlTemplate>
+													</Setter.Value>
+												</Setter>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+									<Image Grid.Column="2" d:Source="{StaticResource Confirmed}" Source="{Binding Path=EditState, Converter={StaticResource stateImgConverter}}" ToolTip="{Binding Path=EditState}"/>
 
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+								</Grid>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</DockPanel>
+			</Border>
 
 			<Grid>
 				<Grid.RowDefinitions>
@@ -203,7 +211,7 @@
 						<uc:MaskedRegexTextBox Grid.Column="1" Grid.Row="1" Margin="{StaticResource margin}" Mask="0?[0-5]:[0-5]\d:[0-5]\d" ToolTip="Enter a duration between 30 seconds and 3 hours." Text="{Binding Path=Duration}"/>
 						<ComboBox Grid.Column="1" Grid.Row="2" Margin="{StaticResource margin}" ItemsSource="{Binding Source={StaticResource genre}}" SelectedItem="{Binding Path=Genre, Converter={StaticResource enumConverter}}"/>
 						<ItemsControl Grid.Column="1" Grid.Row="3" Margin="{StaticResource margin}" ItemsSource="{Binding Path=Darsteller}" IsTabStop="False"
-													Background="AliceBlue" BorderBrush="#FFABAdB3" BorderThickness="1" Grid.IsSharedSizeScope="True" MouseUp="ListBox_MouseUp">
+													Background="AliceBlue" BorderBrush="{StaticResource ListBorderBrush}" BorderThickness="1" Grid.IsSharedSizeScope="True" MouseUp="ListBox_MouseUp">
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<Grid>
