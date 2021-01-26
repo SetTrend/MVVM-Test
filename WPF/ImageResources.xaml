@@ -1,0 +1,106 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=netstandard">
+	<Rect x:Key="rectSize">0,0,14,14</Rect>
+
+	<s:Double x:Key="rounding">3</s:Double>
+
+	<DrawingImage x:Key="Clean">
+		<DrawingImage.Drawing>
+			<DrawingGroup>
+				<GeometryDrawing>
+					<GeometryDrawing.Geometry>
+						<RectangleGeometry Rect="{StaticResource rectSize}" RadiusX="{StaticResource rounding}" RadiusY="{StaticResource rounding}"/>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+			</DrawingGroup>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+
+	<DrawingImage x:Key="Dirty">
+		<DrawingImage.Drawing>
+			<DrawingGroup>
+				<GeometryDrawing>
+					<GeometryDrawing.Brush>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+							<LinearGradientBrush.GradientStops>
+								<GradientStop Offset="0" Color="#f7a" />
+								<GradientStop Offset="1" Color="red" />
+							</LinearGradientBrush.GradientStops>
+						</LinearGradientBrush>
+					</GeometryDrawing.Brush>
+					<GeometryDrawing.Pen>
+						<Pen Brush="white" Thickness="2"/>
+					</GeometryDrawing.Pen>
+					<GeometryDrawing.Geometry>
+						<RectangleGeometry Rect="{StaticResource rectSize}" RadiusX="{StaticResource rounding}" RadiusY="{StaticResource rounding}"/>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+				<GeometryDrawing Brush="white">
+					<GeometryDrawing.Geometry>
+						<EllipseGeometry RadiusX="2" RadiusY="2" Center="7,7"/>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+			</DrawingGroup>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+
+	<DrawingImage x:Key="Temporary">
+		<DrawingImage.Drawing>
+			<DrawingGroup>
+				<GeometryDrawing>
+					<GeometryDrawing.Brush>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+							<LinearGradientBrush.GradientStops>
+								<GradientStop Offset="0" Color="DodgerBlue" />
+								<GradientStop Offset="1" Color="CadetBlue" />
+							</LinearGradientBrush.GradientStops>
+						</LinearGradientBrush>
+					</GeometryDrawing.Brush>
+					<GeometryDrawing.Pen>
+						<Pen Brush="white" Thickness="2"/>
+					</GeometryDrawing.Pen>
+					<GeometryDrawing.Geometry>
+						<RectangleGeometry Rect="{StaticResource rectSize}" RadiusX="{StaticResource rounding}" RadiusY="{StaticResource rounding}"/>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+				<GeometryDrawing Brush="white">
+					<GeometryDrawing.Geometry>
+						<PathGeometry Figures="M 7,2 L 8,5.5 L 12,5.5 L 9,8 L 10,12 L 7,9.3 L 4,12 L 5,8 L 2,5.5 L 6,5.5 Z"/>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+			</DrawingGroup>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+
+	<DrawingImage x:Key="Confirmed">
+		<DrawingImage.Drawing>
+			<DrawingGroup>
+				<GeometryDrawing>
+					<GeometryDrawing.Brush>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+							<LinearGradientBrush.GradientStops>
+								<GradientStop Offset="0" Color="PaleGreen" />
+								<GradientStop Offset="1" Color="ForestGreen" />
+							</LinearGradientBrush.GradientStops>
+						</LinearGradientBrush>
+					</GeometryDrawing.Brush>
+					<GeometryDrawing.Pen>
+						<Pen Brush="white" Thickness="2"/>
+					</GeometryDrawing.Pen>
+					<GeometryDrawing.Geometry>
+						<RectangleGeometry Rect="{StaticResource rectSize}" RadiusX="{StaticResource rounding}" RadiusY="{StaticResource rounding}"/>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+				<GeometryDrawing>
+					<GeometryDrawing.Pen>
+						<Pen Brush="White" Thickness="2" StartLineCap="Round" EndLineCap="Round"/>
+					</GeometryDrawing.Pen>
+					<GeometryDrawing.Geometry>
+						<PathGeometry Figures="M 4,6 L 5.5,9 L 10,4"/>
+					</GeometryDrawing.Geometry>
+				</GeometryDrawing>
+			</DrawingGroup>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+</ResourceDictionary>
