@@ -22,11 +22,13 @@
 
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="Schauspieler_liste" ItemsSource="{Binding Path=Darsteller.Commands}">
-				<MenuItem.ItemTemplate>
-					<DataTemplate>
-						<MenuItem Command="{Binding}" CommandParameter="{Binding ElementName=Grid, Path=SelectedItem}" Header="{Binding Path=Text}"/>
-					</DataTemplate>
-				</MenuItem.ItemTemplate>
+				<MenuItem.ItemContainerStyle>
+					<Style TargetType="MenuItem">
+						<Setter Property="Command" Value="{Binding}"/>
+						<Setter Property="CommandParameter" Value="{Binding ElementName=Grid, Path=SelectedItem}"/>
+						<Setter Property="Header" Value="{Binding Path=Text}"/>
+					</Style>
+				</MenuItem.ItemContainerStyle>
 			</MenuItem>
 			<MenuItem Header="_Schauspieler" ItemsSource="{Binding ElementName=Grid, Path=SelectedItem.Commands}">
 				<MenuItem.ItemTemplate>
