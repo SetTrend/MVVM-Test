@@ -41,8 +41,8 @@
 			<MenuItem Header="Film_liste" ItemsSource="{Binding Path=Commands}">
 				<MenuItem.ItemContainerStyle>
 					<Style TargetType="MenuItem">
-						<Setter Property="Command" Value="{Binding}"/>
 						<Setter Property="CommandParameter" Value="{Binding ElementName=Filmliste, Path=SelectedItem}"/>
+						<Setter Property="Command" Value="{Binding}"/>
 						<Setter Property="Header" Value="{Binding Path=Text}"/>
 					</Style>
 				</MenuItem.ItemContainerStyle>
